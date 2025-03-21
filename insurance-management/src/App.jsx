@@ -14,50 +14,8 @@ const App = () => {
       .catch((error) => console.error("Error fetching policies:", error));
   }, []);
 
-  const addPolicy = (policy) => {
-    axios
-      .post("http://localhost:5000/policies", policy)
-      .then((response) => setPolicies([...policies, response.data]))
-      .catch((error) => console.error("Error adding policy:", error));
-  };
-
-  const updatePolicy = (id, updatedPolicy) => {
-    axios
-      .patch(`http://localhost:5000/policies/${id}`, updatedPolicy)
-      .then(() => {
-        setPolicies(
-          policies.map((policy) => (policy.id === id ? updatedPolicy : policy))
-        );
-        setEditingPolicy(null);
-      })
-      .catch((error) => console.error("Error updating policy:", error));
-  };
-
-  const deletePolicy = (id) => {
-    axios
-      .delete(`http://localhost:5000/policies/${id}`)
-      .then(() =>
-        setPolicies(policies.filter((policy) => policy.id !== id))
-      )
-      .catch((error) => console.error("Error deleting policy:", error));
-  };
-
-  return (
-    <div className="container">
-      <h1>Policy Management System</h1>
-      <PolicyForm
-        onAddPolicy={addPolicy}
-        onUpdatePolicy={updatePolicy}
-        editingPolicy={editingPolicy}
-        setEditingPolicy={setEditingPolicy}
-      />
-      <PolicyTable
-        policies={policies}
-        onEdit={setEditingPolicy}
-        onDelete={deletePolicy}
-      />
-    </div>
-  );
+  
+  
 };
 
 export default App;
