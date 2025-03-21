@@ -33,7 +33,15 @@ const App = () => {
       .catch((error) => console.error("Error updating policy:", error));
   };
 
-  
+  const deletePolicy = (id) => {
+    axios
+      .delete(`http://localhost:5000/policies/${id}`)
+      .then(() =>
+        setPolicies(policies.filter((policy) => policy.id !== id))
+      )
+      .catch((error) => console.error("Error deleting policy:", error));
+  };
+
 };
 
 export default App;
