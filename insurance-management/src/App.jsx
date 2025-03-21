@@ -21,6 +21,18 @@ const App = () => {
       .catch((error) => console.error("Error adding policy:", error));
   };
 
+  const updatePolicy = (id, updatedPolicy) => {
+    axios
+      .patch(`http://localhost:5000/policies/${id}`, updatedPolicy)
+      .then(() => {
+        setPolicies(
+          policies.map((policy) => (policy.id === id ? updatedPolicy : policy))
+        );
+        setEditingPolicy(null);
+      })
+      .catch((error) => console.error("Error updating policy:", error));
+  };
+
   
 };
 
