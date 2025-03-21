@@ -42,6 +42,22 @@ const App = () => {
       .catch((error) => console.error("Error deleting policy:", error));
   };
 
+  return (
+    <div className="container">
+      <h1>Policy Management System</h1>
+      <PolicyForm
+        onAddPolicy={addPolicy}
+        onUpdatePolicy={updatePolicy}
+        editingPolicy={editingPolicy}
+        setEditingPolicy={setEditingPolicy}
+      />
+      <PolicyTable
+        policies={policies}
+        onEdit={setEditingPolicy}
+        onDelete={deletePolicy}
+      />
+    </div>
+  );
 };
 
 export default App;
