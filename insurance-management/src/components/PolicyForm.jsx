@@ -22,7 +22,19 @@ const PolicyForm = ({ policy = {}, onSubmit, onCancel }) => {
     }
   }, [policy]);
 
- 
+  // Handle input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(formData);
+  };
+
+  
 };
 
 export default PolicyForm;
