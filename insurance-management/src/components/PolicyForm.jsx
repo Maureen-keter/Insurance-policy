@@ -34,7 +34,69 @@ const PolicyForm = ({ policy = {}, onSubmit, onCancel }) => {
     onSubmit(formData);
   };
 
-  
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>ID:</label>
+        <input
+          type="text"
+          name="id"
+          value={formData.id}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <label>Name:</label>
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <label>Type:</label>
+        <input
+          type="text"
+          name="type"
+          value={formData.type}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <label>Premium:</label>
+        <input
+          type="number"
+          name="premium"
+          value={formData.premium}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <label>Status:</label>
+        <select
+          name="status"
+          value={formData.status}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Select Status</option>
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+        </select>
+      </div>
+      <div>
+        <button type="submit">Save</button>
+        <button type="button" onClick={onCancel}>
+          Cancel
+        </button>
+      </div>
+    </form>
+  );
 };
 
 export default PolicyForm;
