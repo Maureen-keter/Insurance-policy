@@ -14,7 +14,13 @@ const App = () => {
       .catch((error) => console.error("Error fetching policies:", error));
   }, []);
 
-  
+  const addPolicy = (policy) => {
+    axios
+      .post("http://localhost:5000/policies", policy)
+      .then((response) => setPolicies([...policies, response.data]))
+      .catch((error) => console.error("Error adding policy:", error));
+  };
+
   
 };
 
