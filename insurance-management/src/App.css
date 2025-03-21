@@ -1,42 +1,43 @@
-#root {
-  max-width: 1280px;
+.app {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.policy-form {
+  margin-bottom: 20px;
+}
+
+.policy-form input,
+.policy-form select,
+.policy-form button {
+  margin: 5px;
+  padding: 10px;
+}
+
+.policy-table {
+  width: 80%;
   margin: 0 auto;
-  padding: 2rem;
+  border-collapse: collapse;
+}
+
+.policy-table th,
+.policy-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.policy-table th {
+  background-color: #f4f4f4;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button {
+  padding: 5px 10px;
+  margin: 2px;
+  border: none;
+  cursor: pointer;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+button:hover {
+  background-color: #ddd;
 }

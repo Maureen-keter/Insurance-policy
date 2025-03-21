@@ -1,9 +1,8 @@
 import React from "react";
-import PolicyRow from "./PolicyRow";
 
 const PolicyTable = ({ policies, onEdit, onDelete }) => {
   return (
-    <table>
+    <table className="policy-table">
       <thead>
         <tr>
           <th>ID</th>
@@ -16,12 +15,17 @@ const PolicyTable = ({ policies, onEdit, onDelete }) => {
       </thead>
       <tbody>
         {policies.map((policy) => (
-          <PolicyRow
-            key={policy.id}
-            policy={policy}
-            onEdit={onEdit}
-            onDelete={onDelete}
-          />
+          <tr key={policy.id}>
+            <td>{policy.id}</td>
+            <td>{policy.name}</td>
+            <td>{policy.type}</td>
+            <td>{policy.premium}</td>
+            <td>{policy.status}</td>
+            <td>
+              <button onClick={() => onEdit(policy)}>Edit</button>
+              <button onClick={() => onDelete(policy.id)}>Delete</button>
+            </td>
+          </tr>
         ))}
       </tbody>
     </table>

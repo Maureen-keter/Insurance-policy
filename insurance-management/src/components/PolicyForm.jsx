@@ -1,100 +1,74 @@
 import React, { useState, useEffect } from "react";
 
-const PolicyForm = ({ policy = {}, onSubmit, onCancel }) => {
+const PolicyForm = ({ onAddPolicy, onUpdatePolicy, editingPolicy, setEditingPolicy }) => {
   const [formData, setFormData] = useState({
-    id: policy.id || "",
-    name: policy.name || "",
-    type: policy.type || "",
-    premium: policy.premium || "",
-    status: policy.status || "",
+    name: "",
+    type: "",
+    premium: "",
+    status: "",
   });
 
-  // Update formData when editing a policy
   useEffect(() => {
-    if (policy) {
-      setFormData({
-        id: policy.id || "",
-        name: policy.name || "",
-        type: policy.type || "",
-        premium: policy.premium || "",
-        status: policy.status || "",
-      });
+    if (editingPolicy) {
+      setFormData(editingPolicy);
+    } else {
+      setFormData({ name: "", type: "", premium: "", status: "" });
     }
-  }, [policy]);
+  }, [editingPolicy]);
 
-  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);
+    if (editingPolicy) {
+      onUpdatePolicy(editingPolicy.id, formData);
+      setEditingPolicy(null);
+    } else {
+      onAddPolicy(formData);
+    }
+    setFormData({ name: "", type: "", premium: "", status: "" });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>ID:</label>
-        <input
-          type="text"
-          name="id"
-          value={formData.id}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Name:</label>
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Type:</label>
-        <input
-          type="text"
-          name="type"
-          value={formData.type}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Premium:</label>
-        <input
-          type="number"
-          name="premium"
-          value={formData.premium}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Status:</label>
-        <select
-          name="status"
-          value={formData.status}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Select Status</option>
-          <option value="Active">Active</option>
-          <option value="Inactive">Inactive</option>
-        </select>
-      </div>
-      <div>
-        <button type="submit">Save</button>
-        <button type="button" onClick={onCancel}>
-          Cancel
-        </button>
-      </div>
+    <form onSubmit={handleSubmit} className="policy-form">
+      <input
+        type="text"
+        name="name"
+        placeholder="Name"
+        value={formData.name}
+        onChange={handleChange}
+        required
+      />
+      <input
+        type="text"
+        name="type"
+        placeholder="Type"
+        value={formData.type}
+        onChange={handleChange}
+        required
+      />
+      <input
+        type="number"
+        name="premium"
+        placeholder="Premium"
+        value={formData.premium}
+        onChange={handleChange}
+        required
+      />
+      <select
+        name="status"
+        value={formData.status}
+        onChange={handleChange}
+        required
+      >
+        <option value="">Select Status</option>
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+      </select>
+      <button type="submit">{editingPolicy ? "Update" : "Add"} Policy</button>
     </form>
   );
 };
